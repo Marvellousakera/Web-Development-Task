@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validator</title>
+</head>
+
+<style>
+
+    body{
+        background-color: rgb(16, 16, 27);
+        color: rgb(184, 160, 26);
+        padding: 100px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .cover{
+        margin-bottom: 10px;
+        margin-top: 30px;
+
+    }
+
+    button{
+        
+        text-align: center;
+        background-color: rgb(184, 160, 26);
+        padding: 15px 25px;
+        border: none;
+        border-radius:15px;
+        margin-top: 40px;
+        
+    }
+
+    .form{
+        border: 3px solid rgb(184, 160, 26);
+        padding: 30px 40px 50px;
+        border-radius: 15px;
+        width: 280px;
+        height: 400px;
+        
+    }
+
+    input{
+        background-color: rgb(16, 16, 27);
+        border: 1px solid rgb(184, 160, 26);
+        border-radius: 6px;
+        padding: 6px 10px;
+        color: white;
+    }
+
+    input:hover{
+       background-color: rgb(16, 16, 27); 
+       
+    }
+
+     
+
+</style>
+<body>
+
+      <div class="form">
+            <h1>Form Validator</h1>
+            
+                <div class="cover">
+                    <label for="emailInput">Email:</label>
+            <input  placeholder="Enter your email address"  id="emailInput" type="email">
+
+                </div>
+
+                <div class="cover">
+                    <label for="passwordInput">Password:</label>
+            <input id="passwordInput" placeholder="Enter your password"  type="password">
+            <p id="output"></p>
+         </div>
+         
+    <button onclick="
+       submitForm();
+    ">Submit</button>
+
+      </div>
+
+    
+    
+
+      <script>
+
+        function validateEmail(email){
+            return email.includes("@");
+    
+        }
+        
+
+        function validatePassword(pw){
+
+           return pw.length >= 6;
+
+        }
+
+          function submitForm(){
+             
+              let email = document.getElementById("emailInput").value
+              let pw = document.getElementById("passwordInput").value
+
+
+              if(!validateEmail(email)){
+                document.getElementById("output").innerText = "Invalid email";
+              }else if(!validatePassword(pw)){
+                 document.getElementById("output").innerText = "Password too short";
+              }else {
+                document.getElementById("output").innerText = "Success";
+              }
+
+          }
+
+
+
+          /* 
+          - create function to check the email and password validation
+          - use of "if statement" to inform the status of the  submission
+          - learnt how to make it interact with the webpage
+          
+          */
+    </script>
+
+</body>
+</html>
