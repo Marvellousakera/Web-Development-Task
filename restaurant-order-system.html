@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Order System</title>
+</head>
+
+<body>
+
+    <h1>Restaurant Order System</h1>
+
+    <script>
+
+        const Restaurant = {
+
+            menu: [
+
+                {
+                    name: "Burger",
+                    price: 3000
+                },
+
+                {
+                    name: "Pizza",
+                    price: 5000
+                },
+
+                {
+                    name: "Chicken",
+                    price: 4000
+                },
+
+                {
+                    name: "Fries",
+                    price: 2000
+                }
+            ],
+
+
+            orders: [],
+
+
+            addMenuItem: function(itemData) {
+
+                this.menu.push(itemData);
+
+                console.log("Menu item added successfully.");
+            },
+
+
+            createOrder: function(items) {
+
+                const order = {
+
+                    orderId: this.orders.length + 1,
+
+                    items: items,
+
+                    status: "pending"
+                };
+
+
+                this.orders.push(order);
+
+
+                console.log(
+                    "Order " +
+                    order.orderId +
+                    " created successfully."
+                );
+
+
+                return order.orderId;
+            },
+
+
+            calculateTotal: function(orderId) {
+
+                let order = null;
+
+
+                for (let i = 0; i < this.orders.length; i++) {
+
+                    if (this.orders[i].orderId === orderId) {
+
+                        order = this.orders[i];
+
+                        break;
+                    }
+                }
+
+
+                if (order === null) {
+
+                    console.log("Order not found.");
+
+                    return 0;
+                }
+
+
+                let total = 0;
+
+
+                for (let i = 0; i < order.items.length; i++) {
+
+                    const item = order.items[i];
+
+
+                    total =
+                        total +
+                        (item.price * item.quantity);
+                }
+
+
+                return total;
+            },
+
+
+        
+
+            closeOrder: function(orderId) {
+
+                let order = null;
+
+                for (let i = 0; i < this.orders.length; i++) {
+
+                    if (this.orders[i].orderId === orderId) {
+
+                        order = this.orders[i];
+
+                        break;
+                    }
+                }
+
+
+                if (order === null) {
+
+                    console.log("Order not found.");
+
+                    return;
+                }
+
+                const total = this.calculateTotal(orderId);
+
+                order.status = "completed";
+
+
+                console.log("RECEIPT");
+
+                console.log("Order ID: " + order.orderId);
+
+
+            
+                for (let i = 0; i < order.items.length; i++) {
+
+                    const item = order.items[i];
+
+
+                    console.log(
+                        item.name +
+                        " x " +
+                        item.quantity +
+                        " = ₦" +
+                        (item.price * item.quantity)
+                    );
+                }
+
+
+                console.log("Total: ₦" + total);
+
+                console.log("Status: " + order.status);
+
+            },
+
+
+            
+
+            listPendingOrders: function() {
+
+                console.log("PENDING ORDERS:");
+
+
+                for (let i = 0; i < this.orders.length; i++) {
+
+                    const order = this.orders[i];
+
+
+                    if (order.status === "pending") {
+
+                        console.log(
+                            "Order " +
+                            order.orderId +
+                            " - Pending"
+                        );
+                    }
+                }
+            },
+
+
+            showMenu: function() {
+
+                console.log("MENU:");
+
+
+                for (let i = 0; i < this.menu.length; i++) {
+
+                    const item = this.menu[i];
+
+
+                    console.log(
+                        (i + 1) +
+                        ". " +
+                        item.name +
+                        " - ₦" +
+                        item.price
+                    );
+                }
+            }
+
+        };
+
+
+        Restaurant.showMenu();
+
+
+        const order1Items = [
+
+            {
+                name: "Burger",
+                price: 3000,
+                quantity: 2
+            },
+
+            {
+                name: "Fries",
+                price: 2000,
+                quantity: 1
+            }
+        ];
+
+
+        Restaurant.createOrder(order1Items);
+
+
+        const order2Items = [
+
+            {
+                name: "Pizza",
+                price: 5000,
+                quantity: 1
+            },
+
+            {
+                name: "Chicken",
+                price: 4000,
+                quantity: 2
+            }
+        ];
+
+
+        Restaurant.createOrder(order2Items);
+
+
+        const total = Restaurant.calculateTotal(1);
+
+        console.log("Order 1 total: ₦" + total);
+
+        Restaurant.listPendingOrders();
+
+        Restaurant.closeOrder(1);
+
+        Restaurant.listPendingOrders();
+
+    </script>
+
+</body>
+</html>

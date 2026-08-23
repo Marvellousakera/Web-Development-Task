@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Library Catalog</title>
+</head>
+
+<body>
+
+
+    <script>
+
+        const Library = {
+
+            books: [
+                {
+                    id: 1,
+                    title: "Rich Dad Poor Dad",
+                    author: "Robert Kiyosaki",
+                    year: 1997,
+                    genre: "Personal Finance",
+                    status: "available"
+                },
+
+                {
+                    id: 2,
+                    title: "Atomic Habits",
+                    author: "James Clear",
+                    year: 2018,
+                    genre: "Personal Development",
+                    status: "available"
+                },
+
+                {
+                    id: 3,
+                    title: "The Power of Now",
+                    author: "Eckhart Tolle",
+                    year: 1997,
+                    genre: "Spiritual Development",
+                    status: "available"
+                }
+            ],
+
+
+            members: [],
+
+            loans: [],
+
+
+            addBook: function(bookData) {
+
+                this.books.push(bookData);
+
+                console.log("Book added successfully.");
+            },
+
+
+            removeBook: function(bookId) {
+
+                const index = this.books.findIndex(function(book) {
+
+                    return book.id === bookId;
+
+                });
+
+
+                if (index === -1) {
+
+                    console.log("Book not found.");
+
+                    return;
+                }
+
+
+                this.books.splice(index, 1);
+
+                console.log("Book removed successfully.");
+            },
+
+
+            borrowBook: function(bookId, memberName) {
+
+                const book = this.books.find(function(book) {
+
+                    return book.id === bookId;
+
+                });
+
+
+                if (!book) {
+
+                    console.log("Book not found.");
+
+                    return;
+                }
+
+
+                if (book.status === "loaned") {
+
+                    console.log("This book is already loaned.");
+
+                    return;
+                }
+
+
+                book.status = "loaned";
+
+                const member = {
+
+                    memberId: this.members.length + 1,
+
+                    name: memberName
+
+                };
+
+
+                this.members.push(member);
+
+
+                const loan = {
+
+                    bookId: bookId,
+
+                    memberId: member.memberId,
+
+                    memberName: memberName,
+
+                    dueDate: "Not specified"
+
+                };
+
+
+                this.loans.push(loan);
+
+
+                console.log(
+                    book.title +
+                    " has been borrowed by " +
+                    memberName
+                );
+            },
+
+
+            returnBook: function(bookId) {
+
+                const book = this.books.find(function(book) {
+
+                    return book.id === bookId;
+
+                });
+
+
+                if (!book) {
+
+                    console.log("Book not found.");
+
+                    return;
+                }
+
+
+                if (book.status === "available") {
+
+                    console.log("This book is already available.");
+
+                    return;
+                }
+
+
+                book.status = "available";
+
+
+                const loanIndex = this.loans.findIndex(function(loan) {
+
+                    return loan.bookId === bookId;
+
+                });
+
+
+                if (loanIndex !== -1) {
+
+                    this.loans.splice(loanIndex, 1);
+
+                }
+
+
+                console.log(
+                    book.title + " has been returned."
+                );
+            },
+
+
+            listBooks: function() {
+
+                console.log("BOOKS");
+
+
+                if (this.books.length === 0) {
+
+                    console.log("There are no books in the library.");
+
+                    return;
+                }
+
+
+                for (let i = 0; i < this.books.length; i++) {
+
+                    const book = this.books[i];
+
+
+                    console.log(
+                        "ID: " + book.id +
+                        " | Title: " + book.title +
+                        " | Author: " + book.author +
+                        " | Year: " + book.year +
+                        " | Genre: " + book.genre +
+                        " | Status: " + book.status
+                    );
+                }
+            },
+
+        
+            findByAuthor: function(author) {
+                const results = this.books.filter(function(book) {
+
+                    return book.author.toLowerCase()
+                        .includes(author.toLowerCase());
+
+                });
+
+
+                if (results.length === 0) {
+
+                    console.log("No books found by this author.");
+
+                    return;
+                }
+
+
+                console.log("Books found:");
+
+                for (let i = 0; i < results.length; i++) {
+
+                    console.log(results[i]);
+                }
+            },
+
+
+            findByTitle: function(title) {
+
+                const results = this.books.filter(function(book) {
+
+                    return book.title.toLowerCase()
+                        .includes(title.toLowerCase());
+
+                });
+
+
+                if (results.length === 0) {
+
+                    console.log("No books found with that title.");
+
+                    return;
+                }
+
+
+                console.log("Books found:");
+
+                for (let i = 0; i < results.length; i++) {
+
+                    console.log(results[i]);
+                }
+            }
+
+        };
+
+
+        let choice = prompt(
+            "PERSONAL LIBRARY\n\n" +
+
+            "1. Add book\n" +
+            "2. Remove book\n" +
+            "3. Borrow book\n" +
+            "4. Return book\n" +
+            "5. List all books\n" +
+            "6. Search by author\n" +
+            "7. Search by title\n" +
+            "8. Exit\n\n" +
+
+            "Enter your choice:"
+        );
+
+
+
+        if (choice === "1") {
+
+            const id = Number(prompt("Enter book ID:"));
+
+            const title = prompt("Enter book title:");
+
+            const author = prompt("Enter author:");
+
+            const year = Number(prompt("Enter publication year:"));
+
+            const genre = prompt("Enter genre:");
+
+
+            const bookData = {
+
+                id: id,
+
+                title: title,
+
+                author: author,
+
+                year: year,
+
+                genre: genre,
+
+                status: "available"
+
+            };
+
+
+            Library.addBook(bookData);
+
+
+        } else if (choice === "2") {
+
+            const bookId = Number(
+                prompt("Enter the ID of the book to remove:")
+            );
+
+
+            Library.removeBook(bookId);
+
+
+        } else if (choice === "3") {
+
+            const bookId = Number(
+                prompt("Enter the ID of the book to borrow:")
+            );
+
+            const memberName = prompt(
+                "Enter member name:"
+            );
+
+
+            Library.borrowBook(bookId, memberName);
+
+
+        } else if (choice === "4") {
+
+            const bookId = Number(
+                prompt("Enter the ID of the book to return:")
+            );
+
+
+            Library.returnBook(bookId);
+
+
+        } else if (choice === "5") {
+
+            Library.listBooks();
+
+
+        } else if (choice === "6") {
+
+            const author = prompt(
+                "Enter author name:"
+            );
+
+
+
+            Library.findByAuthor(author);
+
+
+        } else if (choice === "7") {
+
+            const title = prompt(
+                "Enter book title:"
+            );
+
+
+            Library.findByTitle(title);
+
+
+        } else if (choice === "8") {
+
+            console.log("Goodbye!");
+
+
+        } else {
+
+            console.log("Invalid choice.");
+
+        }
+
+    </script>
+
+</body>
+</html>
