@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company</title>
+</head>
+<body>
+     <script>
+     const company = {
+           departments: {
+              sales: {
+                   employees: 5 
+                },
+            
+                dev: {
+                    employees: 3
+                }
+           }        
+        };
+
+        company.departments.sales.employees += 1;
+
+        console.log(
+            company.departments.sales.employees + company.departments.dev.employees
+        );
+     </script>
+</body>
+</html>
