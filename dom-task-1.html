@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic List</title>
+</head>
+<body>
+    
+<ul id="myList"></ul>
+
+<script>
+
+    const array = [
+        "Apple",
+        "Banana",
+        "Cherry",
+        "Orange",
+        "Pineapple"
+    ];
+
+   const itemsListed = document.getElementById('myList');
+
+    for(let i = 0;i < array.length; i++){
+
+        const itemsList = document.createElement("li");
+      
+        itemsList.textContent = array[i];
+
+        itemsListed.appendChild(itemsList);
+        
+    }
+
+
+
+    </script>
+
+</body>
+</html>

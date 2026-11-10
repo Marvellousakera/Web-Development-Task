@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        const studentScores = [50, 68, 60, 62, 79];
+
+       let passed = 0;
+       let total = 0;
+
+       for(let i = 0; i < studentScores.length; i++){
+          total += studentScores[i];
+
+          if(studentScores[i] >= 60){
+            passed++;
+          }
+       }
+
+       const averageScore = total / studentScores.length;
+
+       console.log(averageScore);
+
+    </script>
+</body>
+</html>

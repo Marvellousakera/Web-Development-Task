@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Content Dynamically</title>
+</head>
+<body>
+    
+    <input placeholder="Enter your name" id="nameInput" type="text">
+
+    <button id="readBtn">Enter</button>
+
+    <div id="greeting"></div>
+
+    <script>
+
+
+        document.getElementById('readBtn').addEventListener("click", addBtn);
+
+        function addBtn(){
+
+            const name = document.getElementById('nameInput').value;
+        
+
+            if(name.trim() === " "){
+                document.getElementById('greeting').innerText = 'Enter your name';
+            }else {
+
+                document.getElementById('greeting').innerText = 'Hello, '+ name;
+            }
+
+        }
+    </script>
+</body>
+</html>

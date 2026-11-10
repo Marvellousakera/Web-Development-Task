@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Square Of Numbers Using Array</title>
+</head>
+<body>
+
+    <script>
+        const myNumbers = [-4, 4, -1, 6, 0, -7, 10, 9 ];
+
+        const positiveNo = myNumbers.filter(
+            function(num){
+                return num > 0;
+            }
+        ).map(
+            function(num){
+             return   num * num;
+            } );
+        console.log(positiveNo);
+    </script>
+</body>
+</html>
